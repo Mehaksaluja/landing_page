@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 :root {
   background-color: #050505;
@@ -31,6 +30,25 @@ body {
 .animate-gradient {
   background-size: 200% auto;
   animation: textShimmer 4s linear infinite;
+}
+
+/* Slow pulse for hero orbs */
+@keyframes pulseSlow {
+
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 6s ease-in-out infinite;
 }
 
 /* Premium Scrollbar */
