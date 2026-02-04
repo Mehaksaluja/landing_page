@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+:root {
+  background-color: #050505;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  overflow-x: hidden;
+  background-color: #050505;
+}
+
+/* Custom Animation for the Gradient Text */
+@keyframes textShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% auto;
+  animation: textShimmer 4s linear infinite;
+}
