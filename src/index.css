@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
 :root {
   background-color: #050505;
@@ -7,7 +8,7 @@
 
 body {
   margin: 0;
-  font-family: sans-serif;
+  font-family: 'Outfit', sans-serif;
   overflow-x: hidden;
   background-color: #050505;
 }
@@ -30,4 +31,28 @@ body {
 .animate-gradient {
   background-size: 200% auto;
   animation: textShimmer 4s linear infinite;
+}
+
+/* Premium Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e1e1e;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+/* Selection */
+::selection {
+  background-color: #2563eb;
+  color: white;
 }
