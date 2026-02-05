@@ -1,20 +1,32 @@
 import React from 'react';
+import { createPortal } from 'react-dom';
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 
 const WhatsAppCTA = () => {
     const phoneNumber = "919812233346";
-    const message = "Hi, I'm interested in the Velocity Framework for my LinkedIn growth.";
+    const message = "I am interested to grow my LinkedIn account.";
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-    return (
+    const cta = (
         <motion.a
             href={url}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chat on WhatsApp"
-            className="group fixed bottom-8 right-8 z-[100] flex items-center justify-end"
+            className="group fixed bottom-8 right-8 z-[9999] flex flex-col items-end"
         >
+            {/* Message preview - shows when hovering the CTA */}
+            <div className="pointer-events-none absolute bottom-full right-0 mb-2 hidden w-72 rounded-xl border border-white/10 bg-gray-900/95 px-4 py-3 shadow-xl backdrop-blur-sm opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 md:block md:translate-y-2">
+                <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-blue-400">
+                    We'll send this message
+                </p>
+                <p className="text-sm leading-snug text-gray-300 line-clamp-3">
+                    "{message}"
+                </p>
+            </div>
+
+            {/* Blue pill button */}
             <motion.span
                 initial={false}
                 whileHover="hover"
@@ -26,10 +38,10 @@ const WhatsAppCTA = () => {
                     },
                     tap: { scale: 0.97 },
                 }}
-                className="flex items-center overflow-hidden rounded-full bg-[#25D366] text-white"
+                className="flex items-center overflow-hidden rounded-full bg-blue-600 text-white transition-shadow duration-300 hover:bg-blue-500"
                 style={{
                     width: 56,
-                    boxShadow: '0 10px 40px rgba(37, 211, 102, 0.35)',
+                    boxShadow: '0 10px 40px rgba(37, 99, 235, 0.4)',
                 }}
             >
                 <span className="flex h-14 w-14 shrink-0 items-center justify-center md:h-16 md:w-16">
@@ -51,6 +63,8 @@ const WhatsAppCTA = () => {
             </motion.span>
         </motion.a>
     );
+
+    return createPortal(cta, document.body);
 };
 
 export default WhatsAppCTA;
