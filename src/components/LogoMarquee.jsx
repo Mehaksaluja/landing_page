@@ -4,14 +4,26 @@ import { motion } from 'framer-motion';
 const logos = [
     "Microsoft",
     "Google",
-    "Meta",
-    "Nvidia",
     "Amazon",
-    "Apple",
-    "Salesforce",
-    "Netflix",
+    "IBM",
+    "Oracle",
     "Adobe",
-    "Spotify"
+    "Northern Trust",
+    "HPE",
+    "JP Morgan",
+    "Genpec",
+    "UBS",
+    "Nuvama Wealth",
+    "IMAP",
+    "Alpha dev",
+    "algo tutor",
+    "Setu",
+    "Quantum edge",
+    "Vidvatta",
+    "Netleaf",
+    "Teksands",
+    "Accenture",
+    "Rixmax",
 ];
 
 const LogoMarquee = () => {

@@ -51,6 +51,21 @@ body {
   animation: pulseSlow 6s ease-in-out infinite;
 }
 
+/* Services section – center icon glow pulse */
+@keyframes centerGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 28px rgba(10, 102, 194, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(10, 102, 194, 0.65);
+  }
+}
+
+.services-center-glow {
+  animation: centerGlow 2.5s ease-in-out infinite;
+}
+
 /* Premium Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

@@ -1,150 +1,165 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PenTool, TrendingUp, Users, Target, ShieldCheck, Zap, ArrowUpRight } from 'lucide-react';
 
-const services = [
-    {
-        title: "Executive Ghostwriting",
-        description: "We capture your unique voice to create high-authority content that positions you as a thought leader without you typing a single word.",
-        icon: PenTool,
-        accent: "from-blue-500/20 to-blue-600/5",
-        borderGlow: "group-hover:shadow-[0_0_40px_-8px_rgba(59,130,246,0.4)]",
-        color: "text-blue-400",
-    },
-    {
-        title: "Growth Strategy",
-        description: "Data-driven roadmaps to scale your reach from zero to millions of impressions using our proven 'Velocity' framework.",
-        icon: TrendingUp,
-        accent: "from-indigo-500/20 to-indigo-600/5",
-        borderGlow: "group-hover:shadow-[0_0_40px_-8px_rgba(99,102,241,0.4)]",
-        color: "text-indigo-400",
-    },
-    {
-        title: "Outbound Branding",
-        description: "Turn your profile into a high-converting landing page that attracts inbound leads and high-ticket opportunities.",
-        icon: Target,
-        accent: "from-cyan-500/20 to-cyan-600/5",
-        borderGlow: "group-hover:shadow-[0_0_40px_-8px_rgba(6,182,212,0.4)]",
-        color: "text-cyan-400",
-    },
-    {
-        title: "Authority Management",
-        description: "We handle engagement, commenting, and networking so your brand stays active and relevant 24/7 in the right circles.",
-        icon: Users,
-        accent: "from-purple-500/20 to-purple-600/5",
-        borderGlow: "group-hover:shadow-[0_0_40px_-8px_rgba(168,85,247,0.4)]",
-        color: "text-purple-400",
-    },
-    {
-        title: "Performance Analytics",
-        description: "Deep-dive reports on what's working and what's not, with monthly pivots to optimize for maximum ROI.",
-        icon: Zap,
-        accent: "from-amber-500/20 to-amber-600/5",
-        borderGlow: "group-hover:shadow-[0_0_40px_-8px_rgba(245,158,11,0.4)]",
-        color: "text-amber-400",
-    },
-    {
-        title: "Brand Protection",
-        description: "Standardized quality control so every post aligns with your professional reputation and company values.",
-        icon: ShieldCheck,
-        accent: "from-emerald-500/20 to-emerald-600/5",
-        borderGlow: "group-hover:shadow-[0_0_40px_-8px_rgba(16,185,129,0.4)]",
-        color: "text-emerald-400",
-    },
+// Each service: label + position (angle in radians from right, radius %)
+// Layout like image: top arc (3), right column (3), bottom arc (3), left column (3)
+const CX = 50;
+const CY = 50;
+const toRad = (deg) => (deg * Math.PI) / 180;
+
+const SERVICES = [
+    { label: 'Connection request management', angle: toRad(135), radius: 48 },  // top left
+    { label: 'Caption', angle: toRad(90), radius: 48 },                          // top center
+    { label: 'Engagement', angle: toRad(45), radius: 48 },                      // top right
+    { label: 'Hooks', angle: toRad(15), radius: 46 },                             // right column top
+    { label: 'Content strategy', angle: toRad(0), radius: 46 },                  // right mid
+    { label: 'Copywriting', angle: toRad(-15), radius: 46 },                     // right column bottom
+    { label: 'Comment Reply', angle: toRad(300), radius: 48 },                   // bottom right
+    { label: 'Posting', angle: toRad(270), radius: 48 },                         // bottom center
+    { label: 'Niche and feed optimization', angle: toRad(240), radius: 48 },    // bottom left
+    { label: 'Analytics & iteration', angle: toRad(195), radius: 46 },          // left column bottom
+    { label: 'Infographics', angle: toRad(180), radius: 46 },                   // left mid
+    { label: 'Profile optimization', angle: toRad(165), radius: 46 },           // left column top
 ];
 
 const Services = () => {
+    const cx = CX;
+    const cy = CY;
+
     return (
         <section id="services" className="py-28 md:py-36 bg-[#050505] relative overflow-hidden">
-            {/* Background */}
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(59,130,246,0.06),transparent)] pointer-events-none" />
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:64px_64px] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(59,130,246,0.08),transparent)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff02_1px,transparent_1px),linear-gradient(to_bottom,#ffffff02_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto px-6 relative z-10">
-                {/* Header */}
-                <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
-                    <div>
-                        <motion.span
-                            initial={{ opacity: 0, x: -16 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="inline-block text-blue-400 font-semibold tracking-[0.2em] uppercase text-xs mb-4"
-                        >
-                            Our Expertise
-                        </motion.span>
-                        <motion.h2
-                            initial={{ opacity: 0, y: 16 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.05 }}
-                            className="text-3xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight max-w-2xl"
-                        >
-                            Complete <span className="text-white/70 italic font-light">LinkedIn</span> dominance
-                        </motion.h2>
-                    </div>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.2 }}
-                        className="text-gray-500 max-w-sm text-base md:text-lg leading-relaxed"
+            <div className="max-w-4xl mx-auto px-6 relative z-10">
+                {/* Headline with staggered animation */}
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true }}
+                    variants={{
+                        visible: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+                        hidden: {},
+                    }}
+                    className="text-center mb-12 md:mb-16"
+                >
+                    <motion.h2
+                        variants={{ hidden: { opacity: 0, y: 24 }, visible: { opacity: 1, y: 0 } }}
+                        transition={{ duration: 0.5 }}
+                        className="text-2xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight uppercase"
                     >
-                        From profile seeker to industry leader — tools and strategies that scale.
+                        Complete LinkedIn Dominance
+                    </motion.h2>
+                    <motion.p
+                        variants={{ hidden: { opacity: 0, y: 16 }, visible: { opacity: 1, y: 0 } }}
+                        transition={{ duration: 0.5 }}
+                        className="text-lg md:text-xl font-semibold text-blue-400/90 uppercase tracking-wide mt-2"
+                    >
+                        100% Done For You
                     </motion.p>
-                </div>
+                </motion.div>
 
-                {/* Bento-style grid: 2 large + 4 standard */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-                    {services.map((service, index) => {
-                        const Icon = service.icon;
-                        const isLarge = index === 0 || index === 3;
+                {/* Diagram */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4 }}
+                    className="relative w-full max-w-[560px] mx-auto aspect-square overflow-visible"
+                >
+                    <svg
+                        className="absolute inset-0 w-full h-full pointer-events-none"
+                        viewBox="0 0 100 100"
+                        preserveAspectRatio="xMidYMid meet"
+                    >
+                        <defs>
+                            <filter id="arcGlow" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur stdDeviation="0.6" result="blur" />
+                                <feFlood floodColor="rgb(59, 130, 246)" floodOpacity="0.5" />
+                                <feComposite in2="blur" operator="in" />
+                                <feMerge>
+                                    <feMergeNode />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        {/* Four concentric circles */}
+                        <circle cx={cx} cy={cy} r={14} fill="none" stroke="rgb(59, 130, 246)" strokeWidth="0.4" opacity="0.55" filter="url(#arcGlow)" />
+                        <circle cx={cx} cy={cy} r={24} fill="none" stroke="rgb(59, 130, 246)" strokeWidth="0.4" opacity="0.45" filter="url(#arcGlow)" />
+                        <circle cx={cx} cy={cy} r={34} fill="none" stroke="rgb(59, 130, 246)" strokeWidth="0.4" opacity="0.4" filter="url(#arcGlow)" />
+                        <circle cx={cx} cy={cy} r={44} fill="none" stroke="rgb(59, 130, 246)" strokeWidth="0.4" opacity="0.35" filter="url(#arcGlow)" />
+                    </svg>
 
+                    {/* Center: LinkedIn icon with pulse glow */}
+                    <motion.div
+                        initial={{ scale: 0, opacity: 0 }}
+                        whileInView={{ scale: 1, opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ type: 'spring', stiffness: 260, damping: 22, delay: 0.1 }}
+                        className="absolute left-1/2 top-1/2 w-14 h-14 md:w-16 md:h-16 -translate-x-1/2 -translate-y-1/2 rounded-xl bg-[#0A66C2] flex items-center justify-center ring-2 ring-white/10 cursor-default services-center-glow"
+                    >
+                        <span className="text-white font-bold text-lg">in</span>
+                    </motion.div>
+
+                    {/* Service pills – radial layout per image */}
+                    {SERVICES.map((item, i) => {
+                        const angleRad = item.angle;
+                        const r = item.radius;
+                        const x = cx + r * Math.cos(angleRad);
+                        const y = cy - r * Math.sin(angleRad);
                         return (
-                            <motion.article
-                                key={index}
-                                initial={{ opacity: 0, y: 24 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-40px" }}
-                                transition={{ delay: index * 0.08 }}
-                                className={`group relative rounded-2xl md:rounded-3xl border border-white/[0.06] bg-white/[0.02] overflow-hidden transition-all duration-500 hover:border-white/15 ${service.borderGlow} ${isLarge ? 'md:col-span-2' : ''}`}
+                            <motion.div
+                                key={item.label}
+                                initial={{ opacity: 0, scale: 0.3 }}
+                                whileInView={{ opacity: 1, scale: 1 }}
+                                viewport={{ once: true }}
+                                transition={{
+                                    type: 'spring',
+                                    stiffness: 180,
+                                    damping: 20,
+                                    delay: 0.25 + i * 0.05,
+                                }}
+                                whileHover={{
+                                    scale: 1.06,
+                                    transition: { duration: 0.2 },
+                                    boxShadow: '0 0 28px rgba(59, 130, 246, 0.5)',
+                                    borderColor: 'rgba(96, 165, 250, 0.8)',
+                                }}
+                                className="absolute flex items-center justify-center gap-2.5 rounded-full border border-blue-500/60 bg-gray-900/95 px-4 py-2.5 shadow-[0_0_20px_rgba(59,130,246,0.35)] backdrop-blur-sm transition-shadow duration-300"
+                                style={{
+                                    left: `${x}%`,
+                                    top: `${y}%`,
+                                    transform: 'translate(-50%, -50%)',
+                                }}
                             >
-                                {/* Gradient overlay on hover */}
-                                <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`} />
-
-                                <div className={`relative p-6 md:p-8 ${isLarge ? 'md:p-10' : ''} flex flex-col h-full min-h-[220px] md:min-h-0`}>
-                                    {/* Top row: number + icon */}
-                                    <div className="flex items-start justify-between mb-5">
-                                        <span className="text-[11px] font-bold text-white/30 tracking-widest tabular-nums">
-                                            {String(index + 1).padStart(2, '0')}
-                                        </span>
-                                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.accent} border border-white/5 flex items-center justify-center group-hover:scale-105 transition-transform duration-300`}>
-                                            <Icon className={`w-6 h-6 ${service.color}`} strokeWidth={1.5} />
-                                        </div>
-                                    </div>
-
-                                    <h3 className={`text-lg md:text-xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors ${isLarge ? 'md:text-2xl' : ''}`}>
-                                        {service.title}
-                                    </h3>
-
-                                    <p className="text-gray-500 text-sm md:text-base leading-relaxed flex-grow group-hover:text-gray-400 transition-colors">
-                                        {service.description}
-                                    </p>
-
-                                    <div className="mt-6 flex items-center gap-2 text-xs font-semibold text-white/50 group-hover:text-blue-400 transition-colors">
-                                        <span>Learn more</span>
-                                        <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                                    </div>
-                                </div>
-
-                                {/* Bottom accent line - expands on hover */}
-                                <div
-                                    className="absolute bottom-0 left-0 h-0.5 w-0 group-hover:w-full transition-all duration-500 bg-blue-500/70 rounded-full"
+                                <motion.span
+                                    animate={{
+                                        opacity: [0.9, 1.2, 0.9],
+                                        boxShadow: [
+                                            '0 0 8px rgba(96,165,250,0.8)',
+                                            '0 0 14px rgba(96,165,250,1)',
+                                            '0 0 8px rgba(96,165,250,0.8)',
+                                        ],
+                                    }}
+                                    transition={{ duration: 2, repeat: Infinity, repeatDelay: 0.5 }}
+                                    className="h-2 w-2 shrink-0 rounded-full bg-blue-400"
                                 />
-                            </motion.article>
+                                <span className="text-sm font-semibold text-white whitespace-nowrap">{item.label}</span>
+                            </motion.div>
                         );
                     })}
-                </div>
+                </motion.div>
 
+                {/* Bottom line */}
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.8 }}
+                    className="text-center text-gray-500 text-sm mt-10 max-w-md mx-auto"
+                >
+                    Strategy, content, and growth — all handled for you
+                </motion.p>
             </div>
         </section>
     );

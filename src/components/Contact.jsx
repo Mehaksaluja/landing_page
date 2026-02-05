@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Mail, User, MessageSquare, Loader2 } from 'lucide-react';
+import { Send, Mail, User, Phone, Loader2 } from 'lucide-react';
+
+const BUDGET_OPTIONS = [
+    { value: '300-500', label: '$300 - $500' },
+    { value: '500-800', label: '$500 - $800' },
+    { value: '800-plus', label: '$800 +' },
+];
 
 const Contact = () => {
-    const [form, setForm] = useState({ name: '', email: '', message: '' });
+    const [form, setForm] = useState({ fullName: '', email: '', whatsapp: '', budget: '' });
     const [status, setStatus] = useState('idle'); // idle | sending | sent | error
 
     const handleChange = (e) => {
@@ -17,12 +23,13 @@ const Contact = () => {
         // Replace with your form backend (Formspree, Netlify, API, etc.)
         await new Promise((r) => setTimeout(r, 800));
         setStatus('sent');
-        setForm({ name: '', email: '', message: '' });
+        setForm({ fullName: '', email: '', whatsapp: '', budget: '' });
     };
 
     const formFields = [
-        { id: 'name', name: 'name', type: 'text', placeholder: 'Your name', Icon: User, label: 'Name *' },
+        { id: 'fullName', name: 'fullName', type: 'text', placeholder: 'Your full name', Icon: User, label: 'Full Name *' },
         { id: 'email', name: 'email', type: 'email', placeholder: 'you@company.com', Icon: Mail, label: 'Email *' },
+        { id: 'whatsapp', name: 'whatsapp', type: 'tel', placeholder: '+1 234 567 8900', Icon: Phone, label: 'WhatsApp Number *' },
     ];
 
     return (
@@ -165,21 +172,36 @@ const Contact = () => {
                                     viewport={{ once: true }}
                                     transition={{ delay: 0.35, duration: 0.4 }}
                                 >
-                                    <label htmlFor="message" className="block text-sm font-medium text-gray-400 mb-2">
-                                        Message *
+                                    <label className="block text-sm font-medium text-gray-400 mb-3">
+                                        To design a strategy that actually delivers results, what monthly investment are you comfortable allocating to your personal brand?
                                     </label>
-                                    <div className="group relative">
-                                        <MessageSquare className="absolute left-4 top-4 w-5 h-5 text-gray-500 transition-colors group-focus-within:text-blue-400" />
-                                        <textarea
-                                            id="message"
-                                            name="message"
-                                            required
-                                            rows={5}
-                                            value={form.message}
-                                            onChange={handleChange}
-                                            placeholder="Tell us about your goals and how we can help..."
-                                            className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300 resize-none"
-                                        />
+                                    <div className="space-y-2.5">
+                                        {BUDGET_OPTIONS.map((opt) => (
+                                            <label
+                                                key={opt.value}
+                                                className={`flex items-center gap-3 p-4 rounded-xl border cursor-pointer transition-all duration-200 ${
+                                                    form.budget === opt.value
+                                                        ? 'border-blue-500/50 bg-blue-500/10 ring-1 ring-blue-500/30'
+                                                        : 'border-white/10 bg-white/5 hover:border-white/20 hover:bg-white/[0.07]'
+                                                }`}
+                                            >
+                                                <input
+                                                    type="radio"
+                                                    name="budget"
+                                                    value={opt.value}
+                                                    checked={form.budget === opt.value}
+                                                    onChange={handleChange}
+                                                    required
+                                                    className="sr-only"
+                                                />
+                                                <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
+                                                    form.budget === opt.value ? 'border-blue-400 bg-blue-500' : 'border-gray-500'
+                                                }`}>
+                                                    {form.budget === opt.value && <span className="h-2 w-2 rounded-full bg-white" />}
+                                                </span>
+                                                <span className="text-white font-medium">{opt.label}</span>
+                                            </label>
+                                        ))}
                                     </div>
                                 </motion.div>
                                 <motion.div
@@ -202,7 +224,7 @@ const Contact = () => {
                                             </>
                                         ) : (
                                             <>
-                                                Send message
+                                                Submit
                                                 <Send className="w-5 h-5" />
                                             </>
                                         )}

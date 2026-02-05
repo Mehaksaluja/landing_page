@@ -1,73 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Sparkles, Heart, MessageCircle, Share2, TrendingUp, Users, Repeat2 } from 'lucide-react';
+import { ArrowRight, Sparkles, Heart, MessageCircle } from 'lucide-react';
 import LogoMarquee from './LogoMarquee';
 import { useCountUp } from '../hooks/useCountUp';
-
-// Center engagement strip - likes, comments, shares flowing in center
-const CenterEngagementStrip = () => {
-    const [likes] = useState(() => 2400 + Math.floor(Math.random() * 600));
-    const [comments] = useState(() => 180 + Math.floor(Math.random() * 120));
-    const [shares] = useState(() => 95 + Math.floor(Math.random() * 55));
-
-    const stats = [
-        { icon: Heart, value: likes, label: 'Likes', color: 'text-red-400', bgGlow: 'shadow-red-500/20', delay: 0 },
-        { icon: MessageCircle, value: comments, label: 'Comments', color: 'text-blue-400', bgGlow: 'shadow-blue-500/20', delay: 0.1 },
-        { icon: Share2, value: shares, label: 'Shares', color: 'text-emerald-400', bgGlow: 'shadow-emerald-500/20', delay: 0.2 },
-    ];
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 mb-10"
-        >
-            {stats.map(({ icon: Icon, value, label, color, bgGlow, delay }, i) => (
-                <motion.div
-                    key={label}
-                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                    animate={{
-                        opacity: 1,
-                        scale: 1,
-                        y: [0, -5, 0],
-                    }}
-                    transition={{
-                        opacity: { duration: 0.5, delay: 0.6 + delay },
-                        scale: { duration: 0.5, delay: 0.6 + delay, type: 'spring', stiffness: 200 },
-                        y: { duration: 2.5 + i * 0.3, repeat: Infinity, ease: 'easeInOut', repeatDelay: 0.5, delay: 1.2 + delay },
-                    }}
-                    whileHover={{ scale: 1.06, y: -4 }}
-                    className={`
-                        flex items-center gap-3 px-5 py-3 rounded-2xl
-                        bg-white/5 border border-white/10 backdrop-blur-xl
-                        shadow-lg ${bgGlow}
-                        transition-shadow duration-300
-                    `}
-                >
-                    <motion.div
-                        animate={{ scale: [1, 1.15, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2, delay: i * 0.3 }}
-                        className={color}
-                    >
-                        <Icon className="w-6 h-6" fill="currentColor" fillOpacity={0.9} strokeWidth={0.5} />
-                    </motion.div>
-                    <div className="text-left">
-                        <motion.span
-                            initial={{ opacity: 0, x: -8 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.8 + delay }}
-                            className="block text-xl font-bold text-white tabular-nums"
-                        >
-                            {value >= 1000 ? (value / 1000).toFixed(1) + 'K' : value}
-                        </motion.span>
-                        <span className="block text-xs text-gray-500 font-medium">{label}</span>
-                    </div>
-                </motion.div>
-            ))}
-        </motion.div>
-    );
-};
 
 // Pure bg spread: left zone + right zone + thode thode middle (center 35–65% lighter)
 const ZONE_LEFT = { min: 0, max: 42 };
@@ -85,8 +20,8 @@ const FallingEngagement = () => {
     const [particles, setParticles] = useState([]);
 
     useEffect(() => {
-        const icons = [Heart, MessageCircle, Share2, TrendingUp, Users, Repeat2];
-        const colors = ['text-red-400/50', 'text-blue-400/50', 'text-emerald-400/50', 'text-purple-400/50', 'text-amber-400/50', 'text-pink-400/50'];
+        const icons = [Heart, MessageCircle];
+        const colors = ['text-red-400/50', 'text-blue-400/50'];
 
         const interval = setInterval(() => {
             const leftPct = getRandomLeft();
@@ -141,59 +76,8 @@ const FallingEngagement = () => {
     );
 };
 
-const FloatingNumbers = () => {
-    const [numbers, setNumbers] = useState([]);
-
-    useEffect(() => {
-        const values = ['+1K', '+500', '+2.5K', '+10K', '+250'];
-        const interval = setInterval(() => {
-            const leftPct = getRandomLeft();
-            const inCenter = leftPct >= ZONE_CENTER.min && leftPct <= ZONE_CENTER.max;
-            const newNumber = {
-                id: Math.random(),
-                value: values[Math.floor(Math.random() * values.length)],
-                left: leftPct,
-                delay: Math.random() * 0.2,
-                duration: 5 + Math.random() * 1.5,
-                subtle: inCenter,
-            };
-            setNumbers(prev => [...prev.slice(-10), newNumber]);
-        }, 850);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    return (
-        <div className="absolute inset-0 overflow-hidden pointer-events-none z-[1]">
-            <AnimatePresence>
-                {numbers.map(number => (
-                    <motion.div
-                        key={number.id}
-                        initial={{ y: '105vh', opacity: 0, scale: 0.6 }}
-                        animate={{
-                            y: -80,
-                            opacity: [0, number.subtle ? 0.4 : 0.6, number.subtle ? 0.3 : 0.5, 0],
-                            scale: [0.6, 1, 1, 0.8],
-                        }}
-                        exit={{ opacity: 0 }}
-                        transition={{
-                            duration: number.duration,
-                            ease: 'easeOut',
-                            delay: number.delay,
-                        }}
-                        className={`absolute font-bold tabular-nums ${number.subtle ? 'text-xs text-blue-400/50' : 'text-sm text-blue-400/70'}`}
-                        style={{ left: `${number.left}%`, transform: 'translateX(-50%)' }}
-                    >
-                        {number.value}
-                    </motion.div>
-                ))}
-            </AnimatePresence>
-        </div>
-    );
-};
-
 const Hero = () => {
-    const impressions = useCountUp(10000000, 3000, 0);
+    const impressions = useCountUp(1000000, 3000, 0);
     const [showCounter, setShowCounter] = useState(false);
 
     useEffect(() => {
@@ -202,7 +86,7 @@ const Hero = () => {
     }, []);
 
     const formatNumber = (num) => {
-        if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+        if (num >= 1000000) return (num / 1000000).toFixed(0) + 'M+';
         if (num >= 1000) return (num / 1000).toFixed(0) + 'K';
         return num.toString();
     };
@@ -220,7 +104,6 @@ const Hero = () => {
             </div>
 
             <FallingEngagement />
-            <FloatingNumbers />
 
             <div className="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-16 text-center flex-grow flex flex-col justify-center items-center">
                 {/* Badge */}
@@ -282,9 +165,6 @@ const Hero = () => {
                     Impressions
                 </motion.h2>
 
-                {/* Center engagement strip - likes, comments, shares */}
-                <CenterEngagementStrip />
-
                 {/* Subtext */}
                 <motion.p
                     initial={{ opacity: 0, y: 20 }}
@@ -301,7 +181,7 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.85 }}
-                    className="flex flex-col sm:flex-row items-center gap-4"
+                    className="flex justify-center"
                 >
                     <motion.button
                         whileHover={{ scale: 1.03, boxShadow: '0 20px 40px -12px rgba(59, 130, 246, 0.4)' }}
@@ -310,13 +190,6 @@ const Hero = () => {
                     >
                         Book a Strategy Call
                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                    </motion.button>
-                    <motion.button
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.98 }}
-                        className="px-8 py-4 bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 text-white font-semibold rounded-xl transition-all duration-300"
-                    >
-                        View Case Studies
                     </motion.button>
                 </motion.div>
             </div>
