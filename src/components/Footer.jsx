@@ -12,7 +12,7 @@ const Footer = () => {
 
                     {/* Brand Section */}
                     <div className="space-y-4 text-center md:text-left">
-                        <div className="text-2xl font-black tracking-tighter text-white uppercase">
+                        <div className="text-2xl font-black tracking-tight text-white">
                             Insyble<span className="text-[#0A66C2]">Tech</span>
                         </div>
                         <p className="text-gray-500 text-sm font-medium max-w-xs mx-auto md:mx-0">

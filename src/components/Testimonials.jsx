@@ -32,7 +32,7 @@ const Results = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-black text-white uppercase tracking-tight">
+                        <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none">
                             Results that <span className="text-[#0A66C2]">Speak</span>
                         </h2>
                         <p className="text-gray-500 mt-3 font-bold uppercase tracking-[0.25em] text-[10px] md:text-xs">

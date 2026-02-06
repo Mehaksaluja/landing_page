@@ -47,7 +47,7 @@ const Services = () => {
                     transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                 >
-                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight uppercase leading-none">
+                    <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none">
                         Complete LinkedIn <span className="text-[#0A66C2]">Dominance</span>
                     </h2>
                     <div className="mt-4 flex items-center justify-center gap-4">
