@@ -35,7 +35,7 @@ const TIERS = [
 
 const Services = () => {
     return (
-        <section className="min-h-screen bg-[#02040a] relative overflow-hidden flex flex-col items-center justify-center py-16 px-4">
+        <section id="services" className="min-h-screen bg-[#02040a] relative overflow-hidden flex flex-col items-center justify-center py-16 px-4">
             {/* Background Ambient */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(10,102,194,0.08),transparent_70%)] pointer-events-none" />
 

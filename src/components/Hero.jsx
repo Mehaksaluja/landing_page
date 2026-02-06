@@ -160,10 +160,20 @@ const Hero = () => {
                     initial={{ opacity: 0, y: 12 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.35 }}
-                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-400 mb-6"
+                    className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-400 mb-4"
                 >
                     Impressions
                 </motion.h2>
+
+                <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                    className="text-base md:text-lg text-gray-500 mb-8 max-w-xl mx-auto"
+                >
+                    Helped <span className="text-blue-400 font-semibold">60+</span> LinkedIn profiles scale using the{' '}
+                    <span className="text-blue-400 font-semibold">Velocity Framework</span>
+                </motion.p>
 
                 {/* Subtext */}
                 <motion.p
@@ -183,12 +193,12 @@ const Hero = () => {
                     transition={{ duration: 0.6, delay: 0.85 }}
                     className="flex justify-center"
                 >
-                    <motion.button
-                        type="button"
+                    <motion.a
+                        href="#contact"
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
                         className="ai-mode-cta group"
-                        style={{ height: '3rem', padding: '0 1.5rem 0 1.25rem', fontSize: '1rem' }}
+                        style={{ height: '3rem', padding: '0 1.5rem 0 1.25rem', fontSize: '1rem', textDecoration: 'none' }}
                     >
                         <span className="gradient-layer">
                             <span className="rotating-gradient" aria-hidden />
@@ -200,7 +210,7 @@ const Hero = () => {
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                             </span>
                         </span>
-                    </motion.button>
+                    </motion.a>
                 </motion.div>
             </div>
 

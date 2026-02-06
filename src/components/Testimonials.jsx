@@ -22,7 +22,7 @@ const Results = () => {
     const visibleTestimonials = showAll ? testimonials : testimonials.slice(0, 6);
 
     return (
-        <section id="results" className="py-20 bg-[#030303] relative overflow-hidden">
+        <section id="testimonials" className="py-20 bg-[#030303] relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
                 {/* Clean Header */}
