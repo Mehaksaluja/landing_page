@@ -17,14 +17,14 @@ const TIERS = [
         radius: 30,
         services: [
             { label: 'Content strategy', angle: 0 },
-            { label: 'Engagement', angle: 90 },
             { label: 'Infographics', angle: 180 },
-            { label: 'Comment Reply', angle: 270 },
         ],
     },
     {
         radius: 42,
         services: [
+            { label: 'Engagement', angle: 90 },
+            { label: 'Comment Reply', angle: 270 },
             { label: 'Analytics & iteration', angle: 45 },
             { label: 'Profile optimization', angle: 135 },
             { label: 'Connection request management', angle: 225 },

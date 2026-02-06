@@ -2,6 +2,11 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Send, Mail, Loader2, CheckCircle2 } from 'lucide-react';
 
+// Form submissions go to your email via EmailJS. Setup: https://www.emailjs.com/
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
+
 const BUDGET_OPTIONS = [
     { value: '200-400', label: '200$ - 400$ ( Please Don\'t Book, we can\'t help )' },
     { value: '400-600', label: '400$ - 600$' },
@@ -11,7 +16,8 @@ const BUDGET_OPTIONS = [
 
 const Contact = () => {
     const [form, setForm] = useState({ fullName: '', email: '', whatsapp: '', linkedinUrl: '', budget: '' });
-    const [status, setStatus] = useState('idle');
+    const [status, setStatus] = useState('idle'); // 'idle' | 'sending' | 'sent' | 'error'
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -20,10 +26,42 @@ const Contact = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+            setStatus('error');
+            setErrorMessage('Email not configured. Please set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID and VITE_EMAILJS_PUBLIC_KEY in .env');
+            return;
+        }
         setStatus('sending');
-        await new Promise((r) => setTimeout(r, 1200));
-        setStatus('sent');
-        setForm({ fullName: '', email: '', whatsapp: '', linkedinUrl: '', budget: '' });
+        setErrorMessage('');
+        try {
+            const res = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    service_id: EMAILJS_SERVICE_ID,
+                    template_id: EMAILJS_TEMPLATE_ID,
+                    user_id: EMAILJS_PUBLIC_KEY,
+                    template_params: {
+                        fullName: form.fullName,
+                        email: form.email,
+                        whatsapp: form.whatsapp,
+                        linkedinUrl: form.linkedinUrl,
+                        budget: form.budget,
+                    },
+                }),
+            });
+            if (res.ok) {
+                setStatus('sent');
+                setForm({ fullName: '', email: '', whatsapp: '', linkedinUrl: '', budget: '' });
+            } else {
+                const text = await res.text();
+                setStatus('error');
+                setErrorMessage(text || 'Something went wrong. Please try again or email us at support@insybletech.com');
+            }
+        } catch (err) {
+            setStatus('error');
+            setErrorMessage('Network error. Please check your connection or email us at support@insybletech.com');
+        }
     };
 
     return (
@@ -74,6 +112,11 @@ const Contact = () => {
                                     <h3 className="text-xl font-bold text-white">Message Sent</h3>
                                     <p className="text-gray-400 mt-2 text-sm">We&apos;ll get back to you within 24 hours.</p>
                                     <button type="button" onClick={() => setStatus('idle')} className="mt-8 text-[#0A66C2] text-sm font-semibold hover:underline">Send another message</button>
+                                </motion.div>
+                            ) : status === 'error' ? (
+                                <motion.div key="error" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-8 px-4">
+                                    <p className="text-red-400 text-sm mb-4">{errorMessage}</p>
+                                    <button type="button" onClick={() => { setStatus('idle'); setErrorMessage(''); }} className="text-[#0A66C2] text-sm font-semibold hover:underline">Try again</button>
                                 </motion.div>
                             ) : (
                                 <form onSubmit={handleSubmit} className="space-y-6">
