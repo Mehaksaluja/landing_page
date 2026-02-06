@@ -184,12 +184,22 @@ const Hero = () => {
                     className="flex justify-center"
                 >
                     <motion.button
-                        whileHover={{ scale: 1.03, boxShadow: '0 20px 40px -12px rgba(59, 130, 246, 0.4)' }}
+                        type="button"
+                        whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
-                        className="group px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl transition-colors duration-300 shadow-lg shadow-blue-600/30 flex items-center gap-2"
+                        className="ai-mode-cta group"
+                        style={{ height: '3rem', padding: '0 1.5rem 0 1.25rem', fontSize: '1rem' }}
                     >
-                        Book a Strategy Call
-                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                        <span className="gradient-layer">
+                            <span className="rotating-gradient" aria-hidden />
+                        </span>
+                        <span className="inner-bg" aria-hidden />
+                        <span className="button-content">
+                            <span className="label">Book a Strategy Call</span>
+                            <span className="icon">
+                                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                            </span>
+                        </span>
                     </motion.button>
                 </motion.div>
             </div>

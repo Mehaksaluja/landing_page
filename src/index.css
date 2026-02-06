@@ -89,3 +89,145 @@ body {
   background-color: #2563eb;
   color: white;
 }
+
+/* AI-mode style CTA buttons (Book a Call / Book a Strategy Call) – theme-matched */
+.ai-mode-cta {
+  --btn-bg: #0f172a;
+  --btn-text: #f1f5f9;
+  --btn-border: rgba(255, 255, 255, 0.2);
+  --gradient-blue: #2563eb;
+  --gradient-blue-light: #3b82f6;
+  --gradient-cyan: #38bdf8;
+  --gradient-white: rgba(255, 255, 255, 0.9);
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.25;
+  height: 2.75rem;
+  padding: 0 1.25rem 0 1rem;
+  position: relative;
+  color: var(--btn-text);
+  overflow: visible;
+  transition: transform 0.15s ease;
+}
+
+.ai-mode-cta:active {
+  transform: scale(0.97);
+}
+
+.ai-mode-cta:focus-visible {
+  outline: 2px solid var(--gradient-blue);
+  outline-offset: 3px;
+}
+
+.ai-mode-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid var(--btn-border);
+  background: rgba(255, 255, 255, 0.06);
+  opacity: 0.6;
+  transition: opacity 0.4s linear, background-color 0.4s linear;
+}
+
+.ai-mode-cta:hover::before {
+  opacity: 0;
+}
+
+.ai-mode-cta .gradient-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.ai-mode-cta .rotating-gradient {
+  position: absolute;
+  inset: 0;
+  height: 200%;
+  top: -50%;
+  opacity: 0;
+  background: conic-gradient(
+    rgba(37, 99, 235, 0) 0deg,
+    var(--gradient-blue) 60deg,
+    var(--gradient-blue-light) 120deg,
+    var(--gradient-cyan) 180deg,
+    var(--gradient-white) 240deg,
+    var(--gradient-blue-light) 300deg,
+    rgba(37, 99, 235, 0) 360deg
+  );
+  transform: rotate(180deg);
+  scale: 2 1;
+  transition: opacity 0.4s linear;
+}
+
+.ai-mode-cta:hover .rotating-gradient {
+  opacity: 1;
+  animation: rotate-gradient-cta 2s linear infinite;
+}
+
+@keyframes rotate-gradient-cta {
+  from {
+    transform: rotate(180deg);
+  }
+  to {
+    transform: rotate(540deg);
+  }
+}
+
+.ai-mode-cta .inner-bg {
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  background: var(--btn-bg);
+  transition: filter 1s cubic-bezier(0, 0, 0, 1);
+}
+
+.ai-mode-cta:hover .inner-bg {
+  filter: blur(3px);
+}
+
+.ai-mode-cta .inner-bg::after {
+  content: "";
+  position: absolute;
+  inset: -12px;
+  border-radius: inherit;
+  background: var(--btn-bg);
+  opacity: 0.5;
+}
+
+.ai-mode-cta .button-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+
+.ai-mode-cta .button-content .icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ai-mode-cta .button-content .icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

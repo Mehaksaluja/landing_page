@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Phone } from 'lucide-react';
 
 const Navbar = () => {
     return (
@@ -34,9 +35,18 @@ const Navbar = () => {
                 </a>
             </div>
 
-            {/* Action Button */}
-            <button className="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-xl transition-all duration-300 shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 active:scale-95">
-                Book a Call
+            {/* Action Button – AI-mode gradient effect */}
+            <button type="button" className="ai-mode-cta">
+                <span className="gradient-layer">
+                    <span className="rotating-gradient" aria-hidden />
+                </span>
+                <span className="inner-bg" aria-hidden />
+                <span className="button-content">
+                    <span className="icon">
+                        <Phone className="w-[1.25rem] h-[1.25rem]" />
+                    </span>
+                    <span className="label">Book a Call</span>
+                </span>
             </button>
         </motion.nav>
     );
