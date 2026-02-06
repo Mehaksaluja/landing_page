@@ -18,9 +18,6 @@ const WhatsAppCTA = () => {
         >
             {/* Message preview - shows when hovering the CTA */}
             <div className="pointer-events-none absolute bottom-full right-0 mb-2 hidden w-72 rounded-xl border border-white/10 bg-gray-900/95 px-4 py-3 shadow-xl backdrop-blur-sm opacity-0 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 md:block md:translate-y-2">
-                <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-blue-400">
-                    We'll send this message
-                </p>
                 <p className="text-sm leading-snug text-gray-300 line-clamp-3">
                     "{message}"
                 </p>
@@ -38,10 +35,10 @@ const WhatsAppCTA = () => {
                     },
                     tap: { scale: 0.97 },
                 }}
-                className="flex items-center overflow-hidden rounded-full bg-blue-600 text-white transition-shadow duration-300 hover:bg-blue-500"
+                className="flex items-center overflow-hidden rounded-full bg-[#25D366] text-white transition-shadow duration-300 hover:bg-[#20BD5A]"
                 style={{
                     width: 56,
-                    boxShadow: '0 10px 40px rgba(37, 99, 235, 0.4)',
+                    boxShadow: '0 10px 40px rgba(37, 211, 102, 0.4)',
                 }}
             >
                 <span className="flex h-14 w-14 shrink-0 items-center justify-center md:h-16 md:w-16">

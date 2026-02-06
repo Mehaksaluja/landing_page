@@ -92,7 +92,7 @@ const Services = () => {
                     <motion.div
                         initial={{ scale: 0.8, opacity: 0 }}
                         whileInView={{ scale: 1, opacity: 1 }}
-                        className="w-14 h-14 md:w-16 md:h-16 bg-[#0A66C2] rounded-xl flex items-center justify-center border border-white/10 shadow-[0_0_30px_rgba(10,102,194,0.3)]"
+                        className="w-14 h-14 md:w-16 md:h-16 bg-[#0A66C2] rounded-xl flex items-center justify-center border border-white/15 shadow-[0_0_40px_rgba(10,102,194,0.45)]"
                     >
                         <span className="text-white text-4xl font-bold leading-none">in</span>
                     </motion.div>

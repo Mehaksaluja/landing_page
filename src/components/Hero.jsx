@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Sparkles, Heart, MessageCircle } from 'lucide-react';
+import { ArrowRight, Sparkles, Heart, MessageCircle, ThumbsUp } from 'lucide-react';
 import LogoMarquee from './LogoMarquee';
 import { useCountUp } from '../hooks/useCountUp';
 
@@ -20,8 +20,8 @@ const FallingEngagement = () => {
     const [particles, setParticles] = useState([]);
 
     useEffect(() => {
-        const icons = [Heart, MessageCircle];
-        const colors = ['text-red-400/50', 'text-blue-400/50'];
+        const icons = [Heart, MessageCircle, ThumbsUp];
+        const colors = ['text-red-400/50', 'text-blue-400/50', 'text-emerald-400/50'];
 
         const interval = setInterval(() => {
             const leftPct = getRandomLeft();
@@ -95,7 +95,7 @@ const Hero = () => {
     const headlineChars = headline.split('');
 
     return (
-        <section className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#050505]">
+        <section id="home" className="relative min-h-screen flex flex-col justify-between overflow-hidden bg-[#050505]">
             {/* Background */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[50%] bg-blue-600/10 blur-[140px] rounded-full animate-pulse-slow" />
@@ -173,17 +173,6 @@ const Hero = () => {
                 >
                     Helped <span className="text-blue-400 font-semibold">60+</span> LinkedIn profiles scale using the{' '}
                     <span className="text-blue-400 font-semibold">Velocity Framework</span>
-                </motion.p>
-
-                {/* Subtext */}
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.7 }}
-                    className="max-w-2xl text-base md:text-lg text-gray-400 mb-12 leading-relaxed"
-                >
-                    We help tech founders and executives build personal brands that drive inbound leads,
-                    establish trust, and create market dominance.
                 </motion.p>
 
                 {/* CTA */}

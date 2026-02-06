@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const logos = [
@@ -15,10 +15,10 @@ const logos = [
     "UBS",
     "Nuvama Wealth",
     "IMAP",
-    "Alpha dev",
-    "algo tutor",
+    "Alpha Dev",
+    "Algo Tutor",
     "Setu",
-    "Quantum edge",
+    "Quantum Edge",
     "Vidvatta",
     "Netleaf",
     "Teksands",
@@ -27,8 +27,24 @@ const logos = [
 ];
 
 const LogoMarquee = () => {
+    const [startMarquee, setStartMarquee] = useState(false);
+    const ref = useRef(null);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting) setStartMarquee(true);
+            },
+            { threshold: 0.2, rootMargin: '0px' }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className="w-full py-14 relative overflow-hidden border-t border-white/[0.06]">
+        <div ref={ref} className="w-full py-14 relative overflow-hidden border-t border-white/[0.06]">
             {/* Softer side fade – logos in view stay clear */}
             <div
                 className="absolute inset-y-0 left-0 w-24 md:w-32 pointer-events-none z-10"
@@ -51,8 +67,12 @@ const LogoMarquee = () => {
 
             <div className="relative flex">
                 <motion.div
-                    animate={{ x: ['0%', '-50%'] }}
-                    transition={{ ease: 'linear', duration: 32, repeat: Infinity }}
+                    animate={{ x: startMarquee ? ['0%', '-50%'] : '0%' }}
+                    transition={{
+                        ease: 'linear',
+                        duration: 32,
+                        repeat: startMarquee ? Infinity : 0,
+                    }}
                     className="flex whitespace-nowrap"
                 >
                     <div className="flex items-center gap-16 md:gap-24 px-8 md:px-12">
